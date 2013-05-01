@@ -1,0 +1,45 @@
+05-01 01:56:24.065: E/Trace(1887): error opening trace file: No such file or directory (2)
+05-01 01:56:24.185: E/dalvikvm(1887): Could not find class 'com.google.android.gms.maps.MapFragment', referenced from method com.example.finalproject.MainActivity.onCreate
+05-01 01:56:24.185: W/dalvikvm(1887): VFY: unable to resolve check-cast 466 (Lcom/google/android/gms/maps/MapFragment;) in Lcom/example/finalproject/MainActivity;
+05-01 01:56:24.185: D/dalvikvm(1887): VFY: replacing opcode 0x1f at 0x0012
+05-01 01:56:24.565: D/AndroidRuntime(1887): Shutting down VM
+05-01 01:56:24.635: W/dalvikvm(1887): threadid=1: thread exiting with uncaught exception (group=0x40a71930)
+05-01 01:56:24.676: E/AndroidRuntime(1887): FATAL EXCEPTION: main
+05-01 01:56:24.676: E/AndroidRuntime(1887): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.example.finalproject/com.example.finalproject.MainActivity}: android.view.InflateException: Binary XML file line #7: Error inflating class fragment
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2180)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2230)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.ActivityThread.access$600(ActivityThread.java:141)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1234)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.os.Handler.dispatchMessage(Handler.java:99)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.os.Looper.loop(Looper.java:137)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.ActivityThread.main(ActivityThread.java:5041)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at java.lang.reflect.Method.invokeNative(Native Method)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at java.lang.reflect.Method.invoke(Method.java:511)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:793)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:560)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at dalvik.system.NativeStart.main(Native Method)
+05-01 01:56:24.676: E/AndroidRuntime(1887): Caused by: android.view.InflateException: Binary XML file line #7: Error inflating class fragment
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:704)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.view.LayoutInflater.rInflate(LayoutInflater.java:746)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:489)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:396)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.view.LayoutInflater.inflate(LayoutInflater.java:352)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at com.android.internal.policy.impl.PhoneWindow.setContentView(PhoneWindow.java:270)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Activity.setContentView(Activity.java:1881)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at com.example.finalproject.MainActivity.onCreate(MainActivity.java:21)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Activity.performCreate(Activity.java:5104)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1080)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2144)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	... 11 more
+05-01 01:56:24.676: E/AndroidRuntime(1887): Caused by: android.app.Fragment$InstantiationException: Unable to instantiate fragment com.google.android.gms.maps.MapFragment: make sure class name exists, is public, and has an empty constructor that is public
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Fragment.instantiate(Fragment.java:592)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Fragment.instantiate(Fragment.java:560)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Activity.onCreateView(Activity.java:4709)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:680)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	... 21 more
+05-01 01:56:24.676: E/AndroidRuntime(1887): Caused by: java.lang.ClassNotFoundException: Didn't find class "com.google.android.gms.maps.MapFragment" on path: /data/app/com.example.finalproject-1.apk
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:65)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:501)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:461)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	at android.app.Fragment.instantiate(Fragment.java:582)
+05-01 01:56:24.676: E/AndroidRuntime(1887): 	... 24 more
