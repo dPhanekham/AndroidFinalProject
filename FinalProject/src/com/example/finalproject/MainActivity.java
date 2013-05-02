@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(this, demo.activityClass));
+				startActivity(new Intent(v.getContext(), mapActivity.class));
 			}
 		});
         
