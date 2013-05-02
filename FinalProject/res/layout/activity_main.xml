@@ -1,13 +1,72 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <fragment
-        android:id="@+id/map"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.MapFragment" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#EEEEEEEE" >
 
-</RelativeLayout> 
+        <TextView
+            android:id="@+id/new_route"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/new_route"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/start"
+            android:text="@string/distance"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/distance"
+            android:text="@string/duration"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/miles"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/distance"
+            android:text="0.0"
+            android:textSize="25sp" />
+
+        <Chronometer
+            android:id="@+id/chrono"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/duration"
+            android:layout_alignBottom="@+id/duration"
+            android:layout_alignLeft="@+id/miles"
+            android:format="H:MM:SS"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/new_route"
+            android:layout_centerHorizontal="true"
+            android:text="@string/start"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</LinearLayout> 
