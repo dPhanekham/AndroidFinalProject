@@ -1,27 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity" >
+<?xml version="1.0" encoding="utf-8"?>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#EEEEEEEE" >
-
-        
-
-        <Button
-            android:id="@+id/start"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/new_route"
-            android:layout_centerHorizontal="true"
-            android:text="@string/start"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-</LinearLayout> 
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/map"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  class="com.google.android.gms.maps.SupportMapFragment"/>
