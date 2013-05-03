@@ -1,4 +1,6 @@
-package com.example.finalproject;
+package com.final_proj.phanekham;
+
+import com.final_proj.phanekham.R;
 
 import android.app.Activity;
 import android.content.Intent;
