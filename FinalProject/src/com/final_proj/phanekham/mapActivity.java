@@ -105,11 +105,11 @@ public class mapActivity extends FragmentActivity implements  OnMyLocationChange
 
 	@Override
 	public void onMyLocationChange(Location location) {
-		
+		Log.d("DSP", "Location change");
 		//if initial point
 		if(locationList.isEmpty()){
 			//TODO set marker here
-			
+			Log.d("DSP", "First location added");
 			locationList.add(location);
 			LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
 			pathPoints.add(point);
@@ -125,7 +125,8 @@ public class mapActivity extends FragmentActivity implements  OnMyLocationChange
 		//if this location is at least 10 meters from previous, add new point
 		else{
 			int size = locationList.size();
-			if(locationList.get(size-1).distanceTo(locationList.get(size-2)) > 10){
+			Log.d("DSP", "Size: " + size);
+			if(location.distanceTo(locationList.get(size-1)) > 10){
 				locationList.add(location);
 				LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
 				pathPoints.add(point);
