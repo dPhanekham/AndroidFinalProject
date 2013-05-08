@@ -3,8 +3,12 @@ package com.final_proj.phanekham;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 
 import com.final_proj.phanekham.R;
@@ -30,16 +34,24 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 
 
-public class mapActivity extends FragmentActivity implements  OnMyLocationChangeListener {
+public class MapActivity extends FragmentActivity implements  OnMyLocationChangeListener {
 	
 	/**
      * Note that this may be null if the Google Play services APK is not available.
      */
     private GoogleMap mMap;
-    
+    private MarkerOptions startPointMarker;
     private PolylineOptions pathPoints;
     private Polyline path;
+    private LatLng startPointCoord;
+    private float length;
+    private boolean newPath;
+    //private Path pathPoints;
     private ArrayList<Location> locationList;
+    
+    private PolylineOptions knownPathPoints;
+    private MarkerOptions knownMarker;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +59,14 @@ public class mapActivity extends FragmentActivity implements  OnMyLocationChange
         setContentView(R.layout.map_activity);
         locationList = new ArrayList<Location>();
         pathPoints = new PolylineOptions();
+        length = 0;
+        newPath = true;
+        Intent intent = getIntent();
+        if(intent.getBooleanExtra("KnownPath", false) == true){
+	        knownPathPoints = intent.getExtras().getParcelable("MapPath");
+			knownMarker = intent.getExtras().getParcelable("MapMarker");
+			newPath = false;
+        }
         
         setUpMapIfNeeded();
     }
@@ -99,48 +119,139 @@ public class mapActivity extends FragmentActivity implements  OnMyLocationChange
     	//mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         //Location current = mMap.getMyLocation();
         //Log.d("DSP", current.toString());
+    	if(!newPath){
+    		knownPathPoints.color(0xff0ff000);
+    		mMap.addMarker(knownMarker);
+    		mMap.addPolyline(knownPathPoints);
+    	}
         
         
     }
 
 	@Override
 	public void onMyLocationChange(Location location) {
-		Log.d("DSP", "Location change");
+		
 		//if initial point
 		if(locationList.isEmpty()){
-			//TODO set marker here
-			Log.d("DSP", "First location added");
-			locationList.add(location);
-			LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
-			pathPoints.add(point);
-			//sets camera to current location
-		    //change default zoom here
+			
+			Log.d("DSP", "Waiting for precise Location");
+			if(location.getAccuracy() < 30)
+			{
+				length = 0;
+				Log.d("DSP", "Precise location added");
+				locationList.add(location);
+				
+				LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
+				pathPoints.add(point);
+				
+				if(startPointMarker == null && newPath == true){
+					startPointMarker = new MarkerOptions().position(point).title("Start");
+					mMap.addMarker(new MarkerOptions().position(point).title("Start"));
+					startPointCoord = point;
+				}
+				
+				//sets camera to current location
+				//change default zoom here
+				CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
+		            new CameraPosition.Builder().target(new LatLng(location.getLatitude(),
+		                    location.getLongitude())).zoom(13.8f).build());
+				mMap.moveCamera(myLoc);
+			}
+			
 			CameraUpdate myLoc = CameraUpdateFactory.newCameraPosition(
 		            new CameraPosition.Builder().target(new LatLng(location.getLatitude(),
 		                    location.getLongitude())).zoom(13.8f).build());
-		    mMap.moveCamera(myLoc);
+				mMap.moveCamera(myLoc);
 			
+		    	
 		}
 		
 		//if this location is at least 10 meters from previous, add new point
 		else{
-			int size = locationList.size();
-			Log.d("DSP", "Size: " + size);
-			if(location.distanceTo(locationList.get(size-1)) > 10){
-				locationList.add(location);
-				LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
-				pathPoints.add(point);
-				path = mMap.addPolyline(pathPoints);
-			}
-			else{
-				Log.d("DSP", "NOT LONG ENOUGH");
+			if(location.getAccuracy() < 40)
+			{
+				int size = locationList.size();
+				Log.d("DSP", "Size: " + size);
+				float d = location.distanceTo(locationList.get(size-1));
+				
+				if( d > 20 && d < 60 ){  ///TODO change these parameters
+					length = length + d;
+					locationList.add(location);
+					LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
+					pathPoints.add(point);
+					path = mMap.addPolyline(pathPoints);
+				}
+				else{
+					Log.d("DSP", "NOT LONG ENOUGH");
+				}
+				
 			}
 			
+			
 		}
-		
-		
-		
 	    
-	    
+	} //end onMyLocationChange
+	
+	@Override
+	public void onPause() {
+	    super.onPause();  // Always call the superclass method first
+	    finish();
+
 	}
+	
+	@Override
+	public void onStop() {
+	    super.onStop();  // Always call the superclass method first
+	    finish();
+
+	}
+	
+	public void onBackPressed() {
+	    super.onBackPressed();
+	}
+	
+	
+	//DIALOG BOX FOR BACK KEY PRESSED
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    // TODO Auto-generated method stub
+
+	    switch(keyCode)
+	    {
+	    case KeyEvent.KEYCODE_BACK:
+	        AlertDialog.Builder ab = new AlertDialog.Builder(MapActivity.this);
+	        ab.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+	        .setNegativeButton("No", dialogClickListener).show();
+	        break;
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+
+	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+	    @Override
+	    public void onClick(DialogInterface dialog, int which) {
+	        switch (which){
+	        case DialogInterface.BUTTON_POSITIVE:
+	        	Intent data;
+	        	if(newPath){
+	        		 data = new Intent();
+		    		Log.d("DSP", "on back pressed");
+		    		data.putExtra("MapSaved", true);
+		    		data.putExtra("MapPath", pathPoints);
+		    		data.putExtra("MapMarker", startPointMarker);
+		    		data.putExtra("length", length);
+		    		setResult(RESULT_OK, data);
+	        	}
+	        	
+	    		onBackPressed();
+	    		finish();
+	            break;
+
+	        case DialogInterface.BUTTON_NEGATIVE:
+	            onBackPressed();
+	            break;
+	        }
+	    }
+	};
 }

@@ -10,5 +10,9 @@
     <string name="distance">Distance</string>
     <string name="search_nearby">Search Nearby!</string>
     <string name="basic_map">Basic Map</string>
+    <string name="path_list">Path List</string>
+    <string name="list_button">Nearby Routes</string>
+    <string name="length">Length</string>
+    <string name="distance_from_you">Distance from you</string>
 
 </resources>

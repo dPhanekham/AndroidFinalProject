@@ -45,8 +45,11 @@
            </intent-filter>
        </activity>
          <activity
-	      android:name="com.final_proj.phanekham.mapActivity"
+	      android:name="com.final_proj.phanekham.MapActivity"
 	      android:label="@string/basic_map"/>
+         <activity
+          android:name="com.final_proj.phanekham.PathList"
+          android:label="@string/path_list" />
        
        <meta-data
 		 android:name="com.google.android.maps.v2.API_KEY"

@@ -1,0 +1,19 @@
+took app for a walk around campus
+
+things that worked
+
+-drawing the route where you walked worked
+
+
+errors
+
+-gps turns off when screen turns off
+
+-when loose gps signal, sets location to coarse location
+
+I NEED TO
+-find a way to continue getting location when screen is off or something
+
+-check for infeasible distance (dont log those points)
+-increase space between points
+-do something about coarse location
