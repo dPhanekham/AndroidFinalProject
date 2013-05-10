@@ -154,6 +154,8 @@ public class MainActivity extends Activity {
 				timeElapsed = data.getLongExtra("TimeElapsed", 0);
 				title = data.getStringExtra("Title");
 				
+				pathName.setText(title);
+				
 				Log.d("DSP", length + ":" + timeElapsed + ":" + title);
 				
 				Integer lengthRounded = (int) length;

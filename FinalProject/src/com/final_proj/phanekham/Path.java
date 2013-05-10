@@ -58,7 +58,7 @@ public class Path  {
 		pathPoints = p;
 		markerOptions = m;
 		length = l;
-		latLng = markerOptions.getPosition();
+		//latLng = markerOptions.getPosition();
 	}
 	
 	public void setLength(float f){
@@ -78,7 +78,7 @@ public class Path  {
 	}
 	
 	public LatLng getLatLng(){
-		return latLng;
+		return markerOptions.getPosition();
 	}
 	
 	public void add(LatLng point){
