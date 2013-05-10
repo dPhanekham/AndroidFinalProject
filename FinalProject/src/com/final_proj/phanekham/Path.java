@@ -43,6 +43,7 @@ public class Path  {
 	private MarkerOptions markerOptions;
 	private LatLng latLng;
 	private float length;
+	private String name;
 	
 	public Path(){
 		pathPoints = new PolylineOptions();
@@ -94,6 +95,18 @@ public class Path  {
 	
 	public PolylineOptions getPolylineOptions(){
 		return pathPoints;
+	}
+	
+	public void setName(String s){
+		name = s;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public float getLength(){
+		return length;
 	}
 
 }

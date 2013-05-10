@@ -1,81 +1,121 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="#4B493F" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#EEEEEEEE" >
-
+    
+    	<LinearLayout 
+    	    android:id="@+id/title_bar"
+    	    android:orientation="horizontal"
+    	    android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:background="#69B253"
+    		android:layout_alignParentTop="true">
+    		
+    	    <ImageView
+    	        android:layout_marginTop="3dp"
+    	        android:layout_width="50dp"
+    	        android:layout_height="50dp"
+    	        android:contentDescription="Logo"
+    	        android:scaleType="fitCenter"
+    	        android:src="@drawable/shoe_print1"/>
+    	    
+    	    <TextView
+	            android:id="@+id/pathfinder"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="@string/pathfinder"
+	            android:textSize="40sp"
+	            android:textColor="#ffffff" />
+    	    
+    	</LinearLayout>
+    	
         <TextView
             android:id="@+id/new_route"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:text="@string/new_route"
-            android:textSize="20sp" />
+            android:textSize="30sp"
+            android:textColor="#ffffff"
+            android:layout_below="@id/title_bar"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/start"
+            style="@style/ButtonText"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/green_menu_button"
+            android:text="@string/start"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/new_route" />
 
         <TextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/start"
             android:text="@string/distance"
-            android:textSize="25sp" />
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/start"  />
+        
+        <TextView
+            android:id="@+id/miles"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/zero"
+            android:textSize="50sp"
+            android:layout_marginLeft="15dp"
+            android:textColor="#ffffff"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/distance" />
 
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/distance"
             android:text="@string/duration"
-            android:textSize="25sp" />
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/miles"  />
 
-        <TextView
-            android:id="@+id/miles"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/start"
-            android:layout_marginLeft="14dp"
-            android:layout_toRightOf="@+id/distance"
-            android:text="0.0"
-            android:textSize="25sp" />
+        
 
         <Chronometer
             android:id="@+id/chrono"
-            android:layout_width="150dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/duration"
-            android:layout_alignBottom="@+id/duration"
-            android:layout_alignLeft="@+id/miles"
-            android:format="H:MM:SS"
-            android:textSize="25sp" />
-
-        <Button
-            android:id="@+id/start"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/new_route"
-            android:layout_centerHorizontal="true"
-            android:text="@string/start"
-            android:textSize="20sp" />
+            android:text="@string/default_time"
+            android:textSize="50sp"
+            android:layout_marginLeft="15dp"
+            android:textColor="#ffffff"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/duration"  />
+        
+        <TextView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:textSize="30sp"
+            android:textColor="#ffffff"
+            android:layout_above="@+id/list_button"
+            android:layout_alignParentLeft="true" />
 
          <Button
              android:id="@+id/list_button"
+             style="@style/ButtonText"
              android:layout_width="200dp"
              android:layout_height="50dp"
-             android:layout_centerHorizontal="true"
-             android:layout_alignParentBottom="true"
+             android:background="@drawable/green_menu_button"
              android:text="@string/list_button"
-             android:textSize="20sp" />
+             android:textSize="20sp"
+             android:layout_alignParentBottom="true"
+             android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
-
-</LinearLayout> 
+</RelativeLayout> 

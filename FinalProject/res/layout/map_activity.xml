@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:map="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/map"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  class="com.google.android.gms.maps.SupportMapFragment"
-  map:mapType="terrain"
-  map:uiCompass="true"
-  map:uiRotateGestures="false" />
+  android:orientation="vertical">
+ 
+
+
+  <TextView
+    android:id="@+id/status_text"
+    android:text=" "
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+  <fragment
+    android:layout_below="@id/status_text"
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    class="com.google.android.gms.maps.SupportMapFragment"/>
+
+        <ImageButton
+            android:id="@+id/stop"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_below="@+id/status_text"
+            android:translationX="50dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="stop"
+            android:scaleType="fitCenter"
+            android:src="@drawable/stop" />
+
+        <ImageButton
+            android:id="@+id/pause_start"
+            android:translationX="-50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_alignTop="@+id/map"
+            android:contentDescription="start and pause"
+            android:scaleType="fitXY"
+            android:src="@drawable/pause" />
+
+</RelativeLayout>

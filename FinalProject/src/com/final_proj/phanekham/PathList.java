@@ -9,8 +9,10 @@ import com.final_proj.phanekham.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -30,7 +32,10 @@ public class PathList extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.pathlist_view);
+        Intent intent = getIntent();
+        Location location = intent.getExtras().getParcelable("location");
         
     	listView = (ListView) findViewById(R.id.list_view);
     	
@@ -48,7 +53,7 @@ public class PathList extends Activity {
 		// Second parameter - Layout for the row
 		// Third parameter - ID of the TextView to which the data is written
 		// Forth - the Array of data
-		PathAdapter adapter = new PathAdapter(this, p);
+		PathAdapter adapter = new PathAdapter(this, p, location);
 
 		// Assign adapter to ListView
 		listView.setAdapter(adapter); 

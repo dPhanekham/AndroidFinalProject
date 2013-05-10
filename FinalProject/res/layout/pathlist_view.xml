@@ -2,7 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#4B493F" >
+    
+    
+    <TextView
+      android:id="@+id/list_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/pathfinder"
+      android:textSize="40sp"
+      android:textColor="#ffffff"
+      android:background="#69B253" />
+    
+    <TextView
+      android:id="@+id/list_instr"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/list_instr"
+      android:textSize="20sp"
+      android:textColor="#ffffff"
+      android:background="#4B493F" />
 
     <ListView
         android:id="@+id/list_view"
