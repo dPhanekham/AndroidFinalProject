@@ -15,11 +15,13 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -29,7 +31,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends Activity {
 	
-	private Button bStart, listButton;
+	private Button startMapButton, listButton;
 	private static ObjectContainer db = null;
 	private static final String DB4O_NAME = "path_database.db4o";
 	public static final int MAP_ACTIVITY_REQUEST_CODE = 1234;
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
 	private long timeElapsed;
 	private String title;
 	private float length;
-	private TextView miles;
+	private TextView miles, pathName;
 	private Chronometer chrono;
 	private LocationManager locationManager;
 	private Location location;
@@ -49,11 +51,14 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         
-        bStart = (Button) findViewById(R.id.start);
+        startMapButton = (Button) findViewById(R.id.start);
         listButton = (Button) findViewById(R.id.list_button);
         miles = (TextView) findViewById(R.id.miles);
         chrono = (Chronometer) findViewById(R.id.chrono);
+        pathName = (TextView) findViewById(R.id.path_name);
         
+        
+        //This is too get a coarse location for distance calculations
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -65,13 +70,15 @@ public class MainActivity extends Activity {
         String provider = locationManager.getBestProvider(criteria, true);
         location = locationManager.getLastKnownLocation(provider);
         
+        //debug code, removes all items f
+        /*
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),   this.getDir("data", 0) + "/" + DB4O_NAME);
         try {
         	Path t = new Path();
             ObjectSet s = db.queryByExample(t);
             Log.d("DSP", "Size of database : " + s.size());
             
-            /* debug code, removes all items f
+           
             Path [] p;
             Object[] ob = s.toArray();
         	p = Arrays.copyOf(ob, ob.length, Path[].class);
@@ -79,16 +86,18 @@ public class MainActivity extends Activity {
             for(int i = 0; i < l; i++){
             	db.delete(p[i]);
             }
-            */
+           
         } 	
         finally {
         
             db.close();
         }
-
+        */
         
-        
-        bStart.setOnClickListener(new View.OnClickListener() {
+        /**
+         * click listener for starting a new path
+         */
+        startMapButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -97,6 +106,10 @@ public class MainActivity extends Activity {
 			}
 		});
         
+        
+        /**
+         * button to look for nearby paths
+         */
         listButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -109,6 +122,28 @@ public class MainActivity extends Activity {
         
     }
     
+    @Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    // TODO Auto-generated method stub
+
+	    switch(keyCode)
+	    {
+	    case KeyEvent.KEYCODE_MENU:
+	        Toast.makeText(getApplicationContext(),
+	    			   "Developer: Derek Phanekham" , Toast.LENGTH_LONG)
+	    			      .show();
+	    	
+	        break;
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+    
+    /**
+     * for the new path returned from MapActivity
+     * displays information in the UI
+     * stores the path in the local database
+     */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 		if(resultCode == RESULT_OK && requestCode == MAP_ACTIVITY_REQUEST_CODE){
 			if(data.getBooleanExtra("MapSaved", false) == true){
@@ -170,18 +205,7 @@ public class MainActivity extends Activity {
 		}
 		
 		else if(resultCode == RESULT_OK && requestCode == LIST_ACTIVITY_REQUEST_CODE){
-			/*(if(data.hasExtra("returnkey1")){
-				//ch =  data.getBooleanArrayExtra("returnkey1");
-				String combined = "";
-				for(int i = 0; i < 15; i++){
-					if(ch[i]){
-						Log.d("DSP", "TRUE");
-						combined += toppings[i] + "\n";
-					}
-				}
-				Log.d("DSP", combined);
-				//text.setText(combined);
-			}*/
+			//I dont need anything here
 		}
 	}
 }

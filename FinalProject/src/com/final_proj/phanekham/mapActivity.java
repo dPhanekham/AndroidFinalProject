@@ -80,6 +80,8 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
         length = 0;
         newPath = true;
         pause = false;
+        
+        //gets intent from listAcivity for following known paths
         Intent intent = getIntent();
         if(intent.getBooleanExtra("KnownPath", false) == true){
 	        knownPathPoints = intent.getExtras().getParcelable("MapPath");
@@ -125,7 +127,7 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
 			
 			@Override
 			public void onClick(View v) {
-				//status.getLayoutParams().height = 200;
+				saveState();
 			}
 		});
     }
@@ -140,16 +142,6 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
      * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not have been
-     * completely destroyed during this process (it is likely that it would only be stopped or
-     * paused), {@link #onCreate(Bundle)} may not be called again so we should call this method in
-     * {@link #onResume()} to guarantee that it will be called.
      */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
@@ -167,10 +159,7 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
     }
 
     /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
+     * This is where we can add markers or lines, add listeners or move the camera
      */
     private void setUpMap() {
     	mMap.setMyLocationEnabled(true);
@@ -188,6 +177,10 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
         
     }
 
+    /**
+     * This is called whenever the the LocationManager (through google maps) finds
+     * your location has changed
+     */
 	@Override
 	public void onMyLocationChange(Location location) {
 		
@@ -286,6 +279,18 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
 	    super.onBackPressed();
 	}
 	
+	public void saveState(){
+		if(newPath){
+    		AlertDialog.Builder ab = new AlertDialog.Builder(MapActivity.this);
+    		input = new EditText(this);
+    		input.setText("Untitled Route");
+    		input.setSelectAllOnFocus(true);
+    		ab.setView(input);
+	        ab.setMessage("Do you want to save your route?").setPositiveButton("Yes", dialogClickListener)
+	        .setNegativeButton("No", dialogClickListener).show();
+    	}
+	}
+	
 	
 	//DIALOG BOX FOR BACK KEY PRESSED
 	@Override
@@ -295,16 +300,7 @@ public class MapActivity extends FragmentActivity implements  OnMyLocationChange
 	    switch(keyCode)
 	    {
 	    case KeyEvent.KEYCODE_BACK:
-	    	if(newPath){
-	    		AlertDialog.Builder ab = new AlertDialog.Builder(MapActivity.this);
-	    		input = new EditText(this);
-	    		input.setText("Untitled Route");
-	    		input.setSelectAllOnFocus(true);
-	    		ab.setView(input);
-		        ab.setMessage("Do you want to save your route?").setPositiveButton("Yes", dialogClickListener)
-		        .setNegativeButton("No", dialogClickListener).show();
-	    	}
-	        
+	    	saveState();
 	        break;
 	    }
 

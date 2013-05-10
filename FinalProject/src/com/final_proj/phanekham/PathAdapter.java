@@ -21,6 +21,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+/**
+ * 
+ * @author Derek
+ *
+ *Custom adapter for an array of paths. 
+ *
+ */
 public class PathAdapter extends ArrayAdapter<Path> {
 	
 	private Activity activity;
@@ -52,17 +60,7 @@ public class PathAdapter extends ArrayAdapter<Path> {
 		View vi=convertView;
         if(convertView==null)
             vi = inflater.inflate(R.layout.path_list_element, null);
-        
-        //CheckBox box = (CheckBox) vi.findViewById(R.id.checkbox);
- 	    //boolean contains = mHash.containsKey(position);
- 	    
- 	   //if (contains && mHash.get(position)) {
-	   //  box.setChecked(true);
-	   //} else {
-	   //  box.setChecked(false);
-	   //}//
-
- 
+       
          TextView title = (TextView) vi.findViewById(R.id.element_title); // title
          TextView distance = (TextView) vi.findViewById(R.id.element_distance); // title
          TextView length = (TextView) vi.findViewById(R.id.element_length); // title

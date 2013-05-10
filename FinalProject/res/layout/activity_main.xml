@@ -52,6 +52,15 @@
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/new_route" />
+        
+        <TextView
+            android:id="@+id/path_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/start"  />
 
         <TextView
             android:id="@+id/distance"
@@ -61,7 +70,7 @@
             android:textSize="15sp"
             android:textColor="#ffffff"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/start"  />
+            android:layout_below="@id/path_name"  />
         
         <TextView
             android:id="@+id/miles"

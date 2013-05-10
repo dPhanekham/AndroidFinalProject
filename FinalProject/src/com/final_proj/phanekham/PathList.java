@@ -20,6 +20,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+/**
+ * 
+ * @author Derek
+ * This object stores a path (a Polyline) and information about the path
+ * such as length, and a marker at its start
+ *
+ *
+ */
 public class PathList extends Activity {
 	
 	private static ObjectContainer db = null;
